@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone Repo') {
             steps {
-                git 'https://github.com/ShaifArfan/react-todo-app.git'
+                git 'https://github.com/SnehaRamachandran30/react-todo-app.git'
             }
         }
 
