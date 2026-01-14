@@ -2,12 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone Repo') {
-            steps {
-                git 'https://github.com/SnehaRamachandran30/react-todo-app.git'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 sh 'docker build -t react-todo-app .'
@@ -25,7 +19,9 @@ pipeline {
 
         stage('Run Container') {
             steps {
-                sh 'docker run -d -p 80:80 --name react-todo react-todo-app'
+                sh '''
+                docker run -d -p 80:80 --name react-todo react-todo-app
+                '''
             }
         }
     }
