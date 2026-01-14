@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone Repo') {
+            steps {
+                git 'https://github.com/ShaifArfan/react-todo-app.git'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t react-todo-app .'
+            }
+        }
+
+        stage('Stop Old Container') {
+            steps {
+                sh '''
+                docker stop react-todo || true
+                docker rm react-todo || true
+                '''
+            }
+        }
+
+        stage('Run Container') {
+            steps {
+                sh 'docker run -d -p 80:80 --name react-todo react-todo-app'
+            }
+        }
+    }
+}
